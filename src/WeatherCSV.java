@@ -162,13 +162,69 @@ public class WeatherCSV {
     }
 
 
+    public double averageTemperatureInFile(CSVParser parser) {
+        double totalTemp = 0.0;
+        int totalCount = 0;
+        
+        for (CSVRecord currentRow : parser) {
+            double currentTemp = Double.parseDouble(currentRow.get("TemperatureF"));
+            totalTemp = totalTemp + currentTemp;
+            totalCount ++;
+        }
+        return totalTemp / totalCount;
+    }
+
+
+    public void testAverageTemperatureInFile() {
+        FileResource fr = new FileResource();
+        CSVParser parser = fr.getCSVParser();
+        double avgtemp = averageTemperatureInFile(parser);
+        System.out.println("avergate temperature in file is "+ avgtemp);
+    }
+
+
+    public double averageTemperatureWithHighHumidityInFile(CSVParser parser, int value) {
+        double totalTemp = 0.0;
+        int totalCount = 0;
+
+        for (CSVRecord currentRow : parser) {
+            int currentHum = Integer.parseInt(currentRow.get("Humidity"));
+            if (currentHum >= value) {
+                double currentTemp = Double.parseDouble(currentRow.get("TemperatureF"));
+                totalTemp = totalTemp + currentTemp;
+                totalCount ++;
+            }
+        }
+        if (totalCount == 0) {
+            return 0.0;
+        }
+        return totalTemp / totalCount;
+    }
+
+
+    public void testAverageTemperatureWithHighHumidityInFile(){
+        FileResource fr = new FileResource();
+        CSVParser parser = fr.getCSVParser();
+        double avgtemp = averageTemperatureWithHighHumidityInFile(parser, 80);
+
+        if (avgtemp == 0.0) {
+            System.out.println("No temperatures with that humidity");
+        }
+        else {
+            System.out.println("avergate temperature with that humidity is "+ avgtemp);
+        }
+    }
+
+
     public static void main (String[] args) {
         System.out.println("Start!");
         WeatherCSV pr = new WeatherCSV();
         // pr.testColdestHourInFile();
         // pr.testFileWithColdestTemperature();
         // pr.testLowestHumidityInFile();
-        pr.testLowestHumidityInManyFiles();
+        // pr.testLowestHumidityInManyFiles();
+        // pr.testAverageTemperatureInFile();
+        pr.testAverageTemperatureWithHighHumidityInFile();
     }
 
 
