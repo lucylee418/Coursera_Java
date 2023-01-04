@@ -23,7 +23,8 @@ public class PerimeterAssignmentRunner {
     public int getNumPoints (Shape s) {
         int count = 0;
         for (Point p : s.getPoints()) {
-          count ++;
+            System.out.println(p);
+            count ++;
         }
         return count;
       }
@@ -49,11 +50,6 @@ public class PerimeterAssignmentRunner {
         return 0.0;
     }
 
-    public String getFileWithLargestPerimeter() {
-        // Put code here
-        File temp = null;    // replace this code
-        return temp.getName();
-    }
 
     public void testPerimeter () {
         FileResource fr = new FileResource();
@@ -66,13 +62,6 @@ public class PerimeterAssignmentRunner {
         System.out.println("average perimeter = " + avglength);  
     }
     
-    public void testPerimeterMultipleFiles() {
-        // Put code here
-    }
-
-    public void testFileWithLargestPerimeter() {
-        // Put code here
-    }
 
     // This method creates a triangle that you can use to test your other methods
     public void triangle(){

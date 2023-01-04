@@ -1,5 +1,4 @@
 import edu.duke.*;
-import java.io.File;
 
 
 public class StringsFirstAssignments {
@@ -123,7 +122,7 @@ public class StringsFirstAssignments {
 
         int totalNum = 0;
         for (String g: genes.data()) {
-            // System.out.println(g);
+            System.out.println(g);
             totalNum = totalNum +1;
         }
         
