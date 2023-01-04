@@ -1,0 +1,14 @@
+{
+    "java.project.sourcePaths": [
+        "src",
+        "W01.PerimeterAssignment",
+        "perimeter_quiz"
+    ],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/lucy/Downloads/courserajava.jar",
+        "courserajava.jar",
+        "commons-csv-1.9.0.jar"
+    ]
+}
