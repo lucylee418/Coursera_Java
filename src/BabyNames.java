@@ -17,20 +17,117 @@ public class BabyNames {
 
     public void printNames() {
         FileResource fr = new FileResource();
+
         for (CSVRecord rec : fr.getCSVParser(false)) {
             String name = rec.get(0);
             String gender = rec.get(1);
             String numborn = rec.get(2);
-            
-            System.out.println("Name: " + name + ", Gender: "+ gender+", Num Born: "+numborn);
+            int numBorn = Integer.parseInt(numborn);
+    
+            if (numBorn <= 100) {
+                System.out.println("Name: " + name + ", Gender: "+ gender+", Num Born: "+numborn);
+            }  
         }
+
+    }
+
+
+    public void totalBirths (FileResource fr) {
+        int totalBirths = 0;
+        int totalBoys = 0;
+        int totalGirls = 0;
+        for (CSVRecord rec : fr.getCSVParser(false)) {
+            int numBorn = Integer.parseInt(rec.get(2));
+            totalBirths += numBorn;
+
+            if (rec.get(1).equals("M")) {
+                totalBoys += numBorn;
+            }
+            else {
+                totalGirls += numBorn;
+            }
+        }
+
+        System.out.println("total births: " + totalBirths);
+        System.out.println("total boys: " + totalBoys);
+        System.out.println("total girls: " + totalGirls);
+    }
+
+
+    public void testTotalBirths () {
+        FileResource fr = new FileResource();
+        totalBirths(fr);
+    }
+
+
+
+    public int getRank(FileResource fr, String name, String gender) {
+        int nameRank = 0;
+        String verify = "No";
+
+        for (CSVRecord rec : fr.getCSVParser(false)) {
+            // If gender matches with the row gender
+            if (rec.get(1).equals(gender)){
+                nameRank ++;
+                // If name matches as well
+                if (rec.get(0).equals(name)){
+                    verify = "Yes";
+                    break;
+                }
+            }
+        }
+        if (verify == "Yes") {
+            return nameRank;
+        }
+        return -1;
+    }
+        
+
+    public void testGetRank () {
+        // Select file
+        FileResource fr = new FileResource();
+        // Select name and gender
+        String name = "Ava";
+        String gender = "M";
+        int nameRank = getRank(fr, name, gender);
+        System.out.println("Name: "+ name + ", Gender: "+gender+", Ranking: "+nameRank);
+    }
+
+
+
+    public String getName(FileResource fr, int rank, String gender) {
+        String nthName = "";
+        for (CSVRecord rec : fr.getCSVParser(false)) {
+
+        }
+        return nthName;
     }
     
+
+    public void testGetName () {
+        // Select file
+        FileResource fr = new FileResource();
+        // Select name and gender
+        int rank = 3;
+        String gender = "F";
+        String nthName = getName(fr, rank, gender);
+        System.out.println(rank+"th "+ gender + "name is: "+nthName);
+    }
+
+
+
+
 
     public static void main (String[] args) {
         System.out.println("Start!");
         BabyNames pr = new BabyNames();
-        pr.printNames();
+        // pr.printNames();
+        // pr.testTotalBirths();
+        // pr.testGetRank();
+        pr.testGetName();
     }
+
+
+
 
 }
