@@ -97,8 +97,39 @@ public class BabyNames {
 
     public String getName(FileResource fr, int rank, String gender) {
         String nthName = "";
-        for (CSVRecord rec : fr.getCSVParser(false)) {
+        int nthRow = 0;
+        int nameGirl = 0;
+        int count = 1;
 
+        // Get number of girls' names
+        for (CSVRecord rec : fr.getCSVParser(false)) {
+            if (rec.get(1).equals("F")) {
+                nameGirl ++;
+            }
+        }
+        System.out.println("Number of girl names is "+nameGirl);
+
+        // Find the row number
+        if (gender == "F") {
+            nthRow = rank;
+        }
+        else {
+            nthRow = nameGirl + rank;
+        }
+        System.out.println("We should look at "+nthRow+"th row");
+
+        // Find nth row's name
+        for (CSVRecord rec : fr.getCSVParser(false)) {
+            if ((count == nthRow) && (rec.get(1).equals(gender))) {
+                nthName = rec.get(0);
+                break;
+            }
+            System.out.println("Count is "+count);
+            count ++;
+        }
+
+        if (nthName.isEmpty()){
+            return "NO NAME";
         }
         return nthName;
     }
@@ -108,13 +139,11 @@ public class BabyNames {
         // Select file
         FileResource fr = new FileResource();
         // Select name and gender
-        int rank = 3;
-        String gender = "F";
+        int rank = 5;
+        String gender = "M";
         String nthName = getName(fr, rank, gender);
-        System.out.println(rank+"th "+ gender + "name is: "+nthName);
+        System.out.println(rank+"th "+ gender + " name is: "+nthName);
     }
-
-
 
 
 
