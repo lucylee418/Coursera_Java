@@ -10,12 +10,12 @@ public class UsingCSV {
         System.out.println("Country info: "+countryInfo(parser1, "Nauru"));
 
         CSVParser parser2 = fr.getCSVParser();
-        System.out.println("<fish and nuts>");
-        listExportersTwoProducts(parser2, "fish", "nuts");
+        System.out.println("<cotton and flowers>");
+        listExportersTwoProducts(parser2, "cotton", "flowers");
 
         CSVParser parser3 = fr.getCSVParser();
-        System.out.println("<number of countries which export gold>");
-        System.out.println(numberOfExporters(parser3, "gold"));
+        System.out.println("<number of countries which export cocoa>");
+        System.out.println(numberOfExporters(parser3, "cocoa"));
 
         CSVParser parser4 = fr.getCSVParser();
         bigExporters(parser4, "$999,999,999,999");
