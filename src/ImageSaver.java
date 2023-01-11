@@ -7,7 +7,16 @@ public class ImageSaver {
         DirectoryResource dr = new DirectoryResource();
         for (File f : dr.selectedFiles()) {
             ImageResource image = new ImageResource(f);
+            // Get the file name
+            String fname = image.getFileName();
+            // Generate a new name
+            String newName = "copy-"+fname;
+            // Assigne the new name
+            image.setFileName(newName);
+            // Show the image (not necessary)
             image.draw();
+            // Save
+            image.save();
         }
     }
 
@@ -17,7 +26,6 @@ public class ImageSaver {
         ImageSaver pr = new ImageSaver();
         pr.doSave();
     }
-
 
 
 }
