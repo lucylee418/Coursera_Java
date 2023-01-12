@@ -90,9 +90,9 @@ public class CaesarCipher {
 
     public static void main(String[] args) {
         CaesarCipher cc = new CaesarCipher();
-        // cc.testCaesar();
-        // System.out.println(cc.encrypt("First Legion", 23));
-        System.out.println(cc.encryptTwoKeys("First Legion", 23, 17));
+        cc.testCaesar();
+        // System.out.println(cc.encrypt("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 15));
+        // System.out.println(cc.encryptTwoKeys("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 8, 21));
     }
 
 
