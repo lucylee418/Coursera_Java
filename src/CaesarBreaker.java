@@ -41,7 +41,6 @@ public class CaesarBreaker {
 
     public String halfOfString(String message, int start){
         StringBuilder newString = new StringBuilder();
-        int mod = start%2;
         for (int i=start; i<message.length(); i += 2){
             newString.append(message.charAt(i));
         }
