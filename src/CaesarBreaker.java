@@ -2,7 +2,7 @@ import edu.duke.*;
 
 public class CaesarBreaker {
 
-    public int[] countLetters(String word){
+    private int[] countLetters(String word){
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         int[] alphabetCounts = new int[26];
         // Check every character
@@ -20,7 +20,7 @@ public class CaesarBreaker {
     }
 
 
-    public int maxIndex(int[] values){
+    private int maxIndex(int[] values){
         int maxSoFar = 0;
         int maxIdx = 0;
         for (int i=0; i<values.length; i++){
@@ -39,7 +39,7 @@ public class CaesarBreaker {
     }
 
 
-    public String halfOfString(String message, int start){
+    private String halfOfString(String message, int start){
         StringBuilder newString = new StringBuilder();
         for (int i=start; i<message.length(); i += 2){
             newString.append(message.charAt(i));
@@ -47,7 +47,7 @@ public class CaesarBreaker {
         return newString.toString();
     }
 
-    public int getKey(String s){
+    private int getKey(String s){
         int[] mycounts = countLetters(s);
         int maxIdx = maxIndex(mycounts);
         int dkey = maxIdx - 4;  // Assume 'e' is the most frequent letter
@@ -59,10 +59,10 @@ public class CaesarBreaker {
 
 
     public String decrypt(String encrypted){
-        // Call CaesarCipher class
-        CaesarCipher cc = new CaesarCipher();
         int dkey = getKey(encrypted);
-        return cc.encrypt(encrypted, 26-dkey);
+        // Call CaesarCipher class
+        CaesarCipher cc = new CaesarCipher(dkey);
+        return cc.decrypt(encrypted);
     }
 
 
@@ -77,10 +77,11 @@ public class CaesarBreaker {
         int key2 = getKey(secondHalf);
         System.out.println("key1: "+key1+", key2: "+key2);
         // Call CaesarCipher class
-        CaesarCipher cc = new CaesarCipher();
+        CaesarCipher cc1 = new CaesarCipher(key1);
+        CaesarCipher cc2 = new CaesarCipher(key2);
         // Decrypt each string
-        String firstDecrypted = cc.encrypt(firstHalf, 26-key1);
-        String secondDecrypted = cc.encrypt(secondHalf, 26-key2);
+        String firstDecrypted = cc1.decrypt(firstHalf);
+        String secondDecrypted = cc2.decrypt(secondHalf);
         // Combine
         int counter = 0;
         for(int i=0; i<encrypted.length(); i++){
