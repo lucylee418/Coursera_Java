@@ -1,5 +1,4 @@
 import edu.duke.*;
-import java.io.File;
 
 public class WordLengths {
 
@@ -42,9 +41,7 @@ public class WordLengths {
         int[] counts = new int[31];
         int[] mycounts = countWordLengths(fr, counts);
         int maxInd = indexOfMax(mycounts);
-
         System.out.println("Most frequent: "+maxInd);
-
         for (int i=0; i<mycounts.length; i++){
             if (mycounts[i] != 0) {
                 System.out.println(mycounts[i]+" words of length "+i);
@@ -55,19 +52,8 @@ public class WordLengths {
 
     public static void main (String[] args){
         WordLengths wl = new WordLengths();
-
         wl.testCountWordLengths();
-
-        // FileResource myresource = new FileResource("CommonWordsData/small.txt");
-        // int[] mycount = new int[20];
-        // System.out.println(wl.countWordLengths(myresource, mycount));
-
-        // String k = "Hello";
-        // System.out.println(k.charAt(0));
     }
-
-
-
 
     
 }
