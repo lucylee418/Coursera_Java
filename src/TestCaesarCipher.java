@@ -37,6 +37,11 @@ public class TestCaesarCipher {
         // Figure out which key was used to encrypt this message 
         int[] myCounts = countLetters(input);
         int maxIdx = maxIndex(myCounts);
+        // Get the key
+        int dkey = maxIdx - 4;  // Assume 'e' is the most frequent letter
+        if (maxIdx < 4) {
+            dkey = 26 - (4-maxIdx);
+        }
         // Create a CaesarCipher object with that key and decrypt the message.
         CaesarCipher cc = new CaesarCipher(maxIdx);
         return cc.decrypt(input);
@@ -52,21 +57,19 @@ public class TestCaesarCipher {
         // Encrypt the String read in using the CaesarCipher object
         String encrypted = cc.encrypt(myString);
         // Print the encrypted String
-        System.out.println(encrypted);
-        // Decrypt the encrypted String using the decrypt method.
-        String decrypted = cc.decrypt(encrypted);
-        // Print
-        System.out.println(decrypted);
+        System.out.println("Encrypted\n"+encrypted);
+        // Decrypt the String using the decrypt method.
+        String decrypted = cc.decrypt(myString);
+        System.out.println("Decrypted\n"+decrypted);
         // Using auto decypter
-        String autoDecrypted = breakCaesarCipher(encrypted);
-        // Print
-        System.out.println(autoDecrypted);
+        String autoDecrypted = breakCaesarCipher(myString);
+        System.out.println("Auto-decrypted\n"+autoDecrypted);
     }
 
 
     public static void main(String[] args) {
-        TestCaesarCipher cc = new TestCaesarCipher();
-        cc.simpleTests();
+        TestCaesarCipher tcc = new TestCaesarCipher();
+        tcc.simpleTests();
     }
 
 

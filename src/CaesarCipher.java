@@ -21,8 +21,8 @@ public class CaesarCipher {
             // i-th character in encrypted
             char currChar = encrypted.charAt(i);
             // its alphabetical index
-            int idxUpper = alphabet.toLowerCase().indexOf(currChar);   // returns -1 if it's not in alphabet
-            int idxLower = alphabet.toUpperCase().indexOf(currChar);   // returns -1 if it's not in alphabet
+            int idxUpper = alphabet.toUpperCase().indexOf(currChar);   // returns -1 if it's not in alphabet
+            int idxLower = alphabet.toLowerCase().indexOf(currChar);   // returns -1 if it's not in alphabet
             // if it's an alphabet,
             if (idxUpper != -1) {
                 // get the corresponding character from the shifted Alphabet reference
@@ -42,11 +42,7 @@ public class CaesarCipher {
 
 
     public String decrypt(String input){
-        int dkey = mainKey - 4;  // Assume 'e' is the most frequent letter
-        if (mainKey < 4) {
-            dkey = 26 - (4-mainKey);
-        }
-        CaesarCipher cc = new CaesarCipher(dkey);
+        CaesarCipher cc = new CaesarCipher(26-mainKey);
         String decrypted = cc.encrypt(input);
         return decrypted;
     }
@@ -92,20 +88,19 @@ public class CaesarCipher {
 
 
     public void testCaesar() {
-        int key = 17;
         // Select a file
         FileResource fr = new FileResource();
         // Convert to String
         String message = fr.asString();
         String encrypted = encrypt(message);
-        System.out.println("<encrypted>\n"+encrypted+"\n<key> "+key);
+        System.out.println("<encrypted>\n"+encrypted+"\n<key> "+mainKey);
         String decrypted = decrypt(encrypted);
         System.out.println("<decrypted>\n"+decrypted);
     }
 
 
     public static void main(String[] args) {
-        CaesarCipher cc = new CaesarCipher(7);
+        CaesarCipher cc = new CaesarCipher(15);
         cc.testCaesar();
         // System.out.println(cc.encrypt("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 15));
     }

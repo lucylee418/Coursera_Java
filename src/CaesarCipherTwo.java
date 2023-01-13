@@ -57,19 +57,17 @@ public class CaesarCipherTwo {
 
 
     public String decrypt(String input){
-        int dkey1 = mainKey1 - 4;  // Assume 'e' is the most frequent letter
-        if (mainKey1 < 4) {
-            dkey1 = 26 - (4-mainKey1);
-        }
-        int dkey2 = mainKey2 - 4;  // Assume 'e' is the most frequent letter
-        if (mainKey2 < 4) {
-            dkey2 = 26 - (4-mainKey2);
-        }
-        CaesarCipherTwo cc = new CaesarCipherTwo(dkey1, dkey2);
+        CaesarCipherTwo cc = new CaesarCipherTwo(26-mainKey1, 26-mainKey2);
         String decrypted = cc.encrypt(input);
         return decrypted;   
     }
     
 
+    public static void main(String[] args) {
+        CaesarCipherTwo cc = new CaesarCipherTwo(21, 8);
+        String message = "Can you imagine life WITHOUT the internet AND computers in your pocket?";
+        System.out.println(cc.encrypt(message));
+        // System.out.println(cc.encrypt("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 15));
+    }
 
 }
