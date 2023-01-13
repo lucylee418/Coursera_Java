@@ -43,7 +43,7 @@ public class TestCaesarCipher {
             dkey = 26 - (4-maxIdx);
         }
         // Create a CaesarCipher object with that key and decrypt the message.
-        CaesarCipher cc = new CaesarCipher(maxIdx);
+        CaesarCipher cc = new CaesarCipher(dkey);
         return cc.decrypt(input);
     }
 

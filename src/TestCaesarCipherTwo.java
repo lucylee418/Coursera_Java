@@ -63,7 +63,7 @@ public class TestCaesarCipherTwo {
         }
         // Create a CaesarCipher object with that key and decrypt the message.
         CaesarCipherTwo cc = new CaesarCipherTwo(dkey1, dkey2);
-        System.out.println("key1: "+dkey1+"key2: "+dkey2);
+        System.out.println("key1: "+dkey1+"  key2: "+dkey2);
         // Decrypt
         String decrypted = cc.decrypt(input);
         return decrypted;
@@ -78,13 +78,13 @@ public class TestCaesarCipherTwo {
         CaesarCipherTwo cct = new CaesarCipherTwo(14, 24);
         // Encrypt the String using the CaesarCipherTwo object
         String encrypted = cct.encrypt(myString);
-        // System.out.println("Encrypted:\n"+encrypted);
+        System.out.println("Encrypted:\n"+encrypted);
         // Decrypt the encrypted String using the decrypt method.
         String decrypted = cct.decrypt(myString);
-        // System.out.println("Decrypted\n"+decrypted);
+        System.out.println("Decrypted\n"+decrypted);
         // Using auto decypter
         String autoDecrypted = breakCaesarCipher(myString);
-        // System.out.println("Auto-decrypted\n"+autoDecrypted);
+        System.out.println("Auto-decrypted\n"+autoDecrypted);
     }
 
     public static void main(String[] args) {
