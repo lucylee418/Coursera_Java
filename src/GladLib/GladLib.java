@@ -10,11 +10,11 @@ public class GladLib {
 	private ArrayList<String> nameList;
 	private ArrayList<String> animalList;
 	private ArrayList<String> timeList;
-	
+	private ArrayList<String> verbList;
 	private Random myRandom;
 	
 	private static String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
-	private static String dataSourceDirectory = "data";
+	private static String dataSourceDirectory = "GladLib/data";
 	
 	public GladLib(){
 		initializeFromSource(dataSourceDirectory);
@@ -34,6 +34,7 @@ public class GladLib {
 		nameList = readIt(source+"/name.txt");		
 		animalList = readIt(source+"/animal.txt");
 		timeList = readIt(source+"/timeframe.txt");		
+		verbList = readIt(source+"/verb.txt");
 	}
 	
 	private String randomFrom(ArrayList<String> source){
@@ -62,6 +63,9 @@ public class GladLib {
 		}
 		if (label.equals("timeframe")){
 			return randomFrom(timeList);
+		}
+		if (label.equals("verb")){
+			return randomFrom(verbList);
 		}
 		if (label.equals("number")){
 			return ""+myRandom.nextInt(50)+5;
@@ -129,9 +133,15 @@ public class GladLib {
 	
 	public void makeStory(){
 	    System.out.println("\n");
-		String story = fromTemplate("data/madtemplate.txt");
+		String story = fromTemplate("GladLib/data/madtemplate.txt");
 		printOut(story, 60);
 	}
+
+    public static void main (String[] args) {
+        GladLib gl = new GladLib();
+        gl.makeStory();
+        
+    }
 	
 
 
