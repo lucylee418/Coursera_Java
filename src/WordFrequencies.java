@@ -1,5 +1,5 @@
 import edu.duke.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class WordFrequencies {
     private ArrayList<String> myWords;
@@ -12,8 +12,10 @@ public class WordFrequencies {
 
 
     public void findUnique(){
+        myWords.clear();
+        myFreqs.clear();
         FileResource resource = new FileResource();
-
+        // Iterate over every word in the file
         for (String s: resource.words()){
             s = s.toLowerCase();
             int index = myWords.indexOf(s);
@@ -30,13 +32,29 @@ public class WordFrequencies {
         }
     }
 
+    // Returns an int that is the index location of the largest value in myFreqs. 
+    public int findIndexOfMax(){
+        int maxSoFar = 0;
+        int maxIdx = 0;
+        for (int i=0; i<myFreqs.size(); i++){
+            if (myFreqs.get(i) > maxSoFar){
+                maxSoFar = myFreqs.get(i);
+                maxIdx = i;
+            }
+        }
+        return maxIdx;
+    }
+
 
     public void tester(){
         findUnique();
-        System.out.println("# unique words: "+myWords.size());
+        System.out.println("Number of unique words: "+myWords.size());
         for(int i=0; i<myWords.size(); i++){
-            // System.out.println(myFreqs.get(i)+"\t"+myWords.get(i));
+            // Print the frequency of each word and the word
+            System.out.println(myFreqs.get(i)+"\t"+myWords.get(i));
         }
+        int idxOfMax = findIndexOfMax();
+        System.out.println("The most frequent word: "+ myWords.get(idxOfMax)+", "+myFreqs.get(idxOfMax)+" times");
     }
 
 
@@ -44,6 +62,6 @@ public class WordFrequencies {
         WordFrequencies wf = new WordFrequencies();
         wf.tester();
     }
-    
+
 
 }

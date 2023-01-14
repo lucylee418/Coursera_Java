@@ -1,5 +1,4 @@
 import edu.duke.*;
-import java.util.*;
 
 public class WordsWithArrays {
     StorageResource myWords;
