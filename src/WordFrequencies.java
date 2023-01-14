@@ -4,10 +4,12 @@ import java.util.*;
 public class WordFrequencies {
     private ArrayList<String> myWords;
     private ArrayList<Integer> myFreqs;
+    private String alphabets;
 
     public WordFrequencies(){
         myWords = new ArrayList<String>();
         myFreqs = new ArrayList<Integer>();
+        alphabets = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
     }
 
 
@@ -18,9 +20,18 @@ public class WordFrequencies {
         // Iterate over every word in the file
         for (String s: resource.words()){
             s = s.toLowerCase();
-            int index = myWords.indexOf(s);
+            StringBuilder sb = new StringBuilder();
+            // Cleanup punctuations
+            for (int i=0; i<s.length(); i++){
+                int idx = alphabets.indexOf(s.charAt(i));
+                if (idx != -1){
+                    sb.append(s.charAt(i));
+                }
+            }
+            String cleanS = sb.toString();
+            int index = myWords.indexOf(cleanS);
             if (index == -1){
-                myWords.add(s);
+                myWords.add(cleanS);
                 myFreqs.add(1);
             }
             else {
@@ -54,7 +65,7 @@ public class WordFrequencies {
             System.out.println(myFreqs.get(i)+"\t"+myWords.get(i));
         }
         int idxOfMax = findIndexOfMax();
-        System.out.println("The most frequent word: "+ myWords.get(idxOfMax)+", "+myFreqs.get(idxOfMax)+" times");
+        System.out.println("The most frequent word: "+ myWords.get(idxOfMax)+": "+myFreqs.get(idxOfMax)+" times");
     }
 
 
