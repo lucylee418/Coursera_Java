@@ -1,6 +1,5 @@
 import edu.duke.*;
 import java.util.*;
-import java.io.File;
 
 public class CharactersInPlay {
     private ArrayList<String> myChar;
@@ -55,12 +54,12 @@ public class CharactersInPlay {
             int currFreq = myFreqs.get(i);
             // A main character is one who has more speaking parts than most people
             // You’ll have to estimate what that number should be.
-            if (currFreq > 1){
+            if (currFreq > 100){
                 // Print out the main character, followed by the number of speaking parts
                 System.out.println(currChar.toUpperCase()+": "+currFreq+" times.");
             }
         }
-        charactersWithNumParts(1, 3);
+        charactersWithNumParts(10, 15);
     }
 
 

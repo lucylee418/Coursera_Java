@@ -9,7 +9,7 @@ public class WordFrequencies {
     public WordFrequencies(){
         myWords = new ArrayList<String>();
         myFreqs = new ArrayList<Integer>();
-        alphabets = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
+        alphabets = "abcdefghijklmnopqrstuvwxyz";
     }
 
 
@@ -29,6 +29,7 @@ public class WordFrequencies {
                 }
             }
             String cleanS = sb.toString();
+            // String cleanS = s.toLowerCase();
             int index = myWords.indexOf(cleanS);
             if (index == -1){
                 myWords.add(cleanS);
@@ -62,7 +63,7 @@ public class WordFrequencies {
         System.out.println("Number of unique words: "+myWords.size());
         for(int i=0; i<myWords.size(); i++){
             // Print the frequency of each word and the word
-            System.out.println(myFreqs.get(i)+"\t"+myWords.get(i));
+            // System.out.println(myFreqs.get(i)+"\t"+myWords.get(i));
         }
         int idxOfMax = findIndexOfMax();
         System.out.println("The most frequent word: "+ myWords.get(idxOfMax)+": "+myFreqs.get(idxOfMax)+" times");
@@ -72,6 +73,7 @@ public class WordFrequencies {
     public static void main (String[] args) {
         WordFrequencies wf = new WordFrequencies();
         wf.tester();
+        
     }
 
 
