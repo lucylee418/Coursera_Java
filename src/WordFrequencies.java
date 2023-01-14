@@ -22,7 +22,9 @@ public class WordFrequencies {
                 myFreqs.add(1);
             }
             else {
+                // Find the current value
                 int value = myFreqs.get(index);
+                // Increase by 1
                 myFreqs.set(index, value+1);
             }
         }
@@ -42,8 +44,6 @@ public class WordFrequencies {
         WordFrequencies wf = new WordFrequencies();
         wf.tester();
     }
-
-
-
+    
 
 }
