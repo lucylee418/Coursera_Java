@@ -11,6 +11,9 @@ public class GladLib {
 	private ArrayList<String> animalList;
 	private ArrayList<String> timeList;
 	private ArrayList<String> verbList;
+	private ArrayList<String> fruitList;
+	private ArrayList<String> usedList;
+	private int numSubs;
 	private Random myRandom;
 	
 	private static String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
@@ -19,13 +22,17 @@ public class GladLib {
 	public GladLib(){
 		initializeFromSource(dataSourceDirectory);
 		myRandom = new Random();
+		usedList = new ArrayList<String>();
+		numSubs = 0;
 	}
 	
+
 	public GladLib(String source){
 		initializeFromSource(source);
 		myRandom = new Random();
 	}
 	
+
 	private void initializeFromSource(String source) {
 		adjectiveList= readIt(source+"/adjective.txt");	
 		nounList = readIt(source+"/noun.txt");
@@ -35,13 +42,16 @@ public class GladLib {
 		animalList = readIt(source+"/animal.txt");
 		timeList = readIt(source+"/timeframe.txt");		
 		verbList = readIt(source+"/verb.txt");
+		fruitList = readIt(source+"/fruit.txt");
 	}
 	
+
 	private String randomFrom(ArrayList<String> source){
 		int index = myRandom.nextInt(source.size());
 		return source.get(index);
 	}
 	
+
 	private String getSubstitute(String label) {
 		if (label.equals("country")) {
 			return randomFrom(countryList);
@@ -67,24 +77,38 @@ public class GladLib {
 		if (label.equals("verb")){
 			return randomFrom(verbList);
 		}
+		if (label.equals("fruit")){
+			return randomFrom(fruitList);
+		}
 		if (label.equals("number")){
 			return ""+myRandom.nextInt(50)+5;
 		}
 		return "**UNKNOWN**";
 	}
 	
+
 	private String processWord(String w){
 		int first = w.indexOf("<");
 		int last = w.indexOf(">",first);
+		// If '<' or '>' doesn't exist in that string, no change
 		if (first == -1 || last == -1){
 			return w;
 		}
-		String prefix = w.substring(0,first);
-		String suffix = w.substring(last+1);
-		String sub = getSubstitute(w.substring(first+1,last));
-		return prefix+sub+suffix;
+		// Else,
+		String prefix = w.substring(0,first);	// before '<'
+		String suffix = w.substring(last+1);	// after '>'
+		while (true){
+			// Get a substitute
+			String sub = getSubstitute(w.substring(first+1,last));
+			if (! usedList.contains(sub)){
+				usedList.add(sub);
+				numSubs ++;
+				return prefix+sub+suffix;
+			}
+		}
 	}
 	
+
 	private void printOut(String s, int lineWidth){
 		int charsWritten = 0;
 		for(String w : s.split("\\s+")){
@@ -97,6 +121,7 @@ public class GladLib {
 		}
 	}
 	
+
 	private String fromTemplate(String source){
 		String story = "";
 		if (source.startsWith("http")) {
@@ -114,6 +139,7 @@ public class GladLib {
 		return story;
 	}
 	
+
 	private ArrayList<String> readIt(String source){
 		ArrayList<String> list = new ArrayList<String>();
 		if (source.startsWith("http")) {
@@ -131,18 +157,22 @@ public class GladLib {
 		return list;
 	}
 	
+
 	public void makeStory(){
+		usedList.clear();
 	    System.out.println("\n");
-		String story = fromTemplate("GladLib/data/madtemplate.txt");
+		String story = fromTemplate("GladLib/data/madtemplate2.txt");
 		printOut(story, 60);
+		System.out.println("\nNumber of words replaced: "+ numSubs);
+		System.out.println("Size of usedList: "+usedList.size());
+		System.out.println(usedList);
 	}
+
 
     public static void main (String[] args) {
         GladLib gl = new GladLib();
         gl.makeStory();
-        
     }
 	
-
 
 }
