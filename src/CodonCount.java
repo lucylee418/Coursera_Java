@@ -58,8 +58,8 @@ public class CodonCount {
                 System.out.println("Number of unique codons: "+map.size());
                 String myCommon = getMostCommonCodon();
                 System.out.println("Most common: "+myCommon+", "+map.get(myCommon)+" times.");
-                System.out.println("Between 1 and 6:");
-                printCodonCounts(1, 6);
+                System.out.println("Between 5 and 8:");
+                printCodonCounts(5, 8);
             }
             
         }        

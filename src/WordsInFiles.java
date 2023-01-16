@@ -84,19 +84,20 @@ public class WordsInFiles {
     public void tester(){
         buildWordFileMap();
         int maxNumber = maxNumber();
-        System.out.println("Maximum number of files any word is in: "+maxNumber);
-        System.out.println("words with maximum number of files: "+wordsInNumFiles(maxNumber));
-        System.out.println(wordsInNumFiles(4).size()+" number of words");
-        for (String w : wordsInNumFiles(maxNumber)){
-            printFilesIn(w);
-        }
+        // System.out.println("Maximum number of files any word is in: "+maxNumber);
+        // System.out.println("words with maximum number of files: "+wordsInNumFiles(maxNumber));
+        // System.out.println("Occur 7 times: " + wordsInNumFiles(7).size()+" number of words");
+        // System.out.println("Occur 4 times: "+wordsInNumFiles(4).size()+" number of words");
+        // for (String w : wordsInNumFiles(maxNumber)){
+        //     printFilesIn(w);
+        // }
     }
 
 
     public static void main (String[] args) {
         WordsInFiles wif = new WordsInFiles();
         wif.tester();
-        wif.printFilesIn("red");
+        wif.printFilesIn("tree");
     }
 
 
