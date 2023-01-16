@@ -16,7 +16,7 @@ public class GladLib {
 	private int numSubs;
 	private Random myRandom;
 	
-	private static String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
+	// private static String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
 	private static String dataSourceDirectory = "GladLib/data";
 	
 	public GladLib(){
