@@ -1,4 +1,4 @@
-// import edu.duke.*;
+import edu.duke.*;
 import java.util.*;
 
 public class CodonCount {
@@ -49,18 +49,20 @@ public class CodonCount {
 
 
     public void tester(){
-        // FileResource fr = new FileResource();
-        // String condons = fr.toString().toUpperCase();
-        String condons = "CGTTCAAGTTCAA";
-        for (int i=0; i<3; i++){
-            buildCodonMap(i, condons);
-            System.out.println("<Reading "+i+">");
-            System.out.println("Number of unique codons: "+map.size());
-            String myCommon = getMostCommonCodon();
-            System.out.println("Most common: "+myCommon+", "+map.get(myCommon)+" times.");
-            System.out.println("Between 1 and 5:");
-            printCodonCounts(1, 5);
-        }
+        FileResource fr = new FileResource();
+        for (String codons : fr.words()){
+            String codon = codons.toUpperCase();
+            for (int i=0; i<3; i++){
+                buildCodonMap(i, codon);
+                System.out.println("<Reading "+i+">");
+                System.out.println("Number of unique codons: "+map.size());
+                String myCommon = getMostCommonCodon();
+                System.out.println("Most common: "+myCommon+", "+map.get(myCommon)+" times.");
+                System.out.println("Between 1 and 6:");
+                printCodonCounts(1, 6);
+            }
+            
+        }        
     }
 
 
@@ -70,7 +72,6 @@ public class CodonCount {
         // cc.buildCodonMap(2, "CGTTCAAGTTCAA");
         cc.tester();
     }
-
 
 
 

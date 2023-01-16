@@ -43,7 +43,6 @@ public class WordsInFiles {
         for (File f : dr.selectedFiles()){
             // puts all of its words into the map by calling the method addWordsFromFile. 
             addWordsFromFile(f);
-            System.out.println(map);
         }
     }
 
@@ -84,12 +83,11 @@ public class WordsInFiles {
 
     public void tester(){
         buildWordFileMap();
-        System.out.println("Built map: "+map);
         int maxNumber = maxNumber();
         System.out.println("Maximum number of files any word is in: "+maxNumber);
         System.out.println("words with maximum number of files: "+wordsInNumFiles(maxNumber));
+        System.out.println(wordsInNumFiles(4).size()+" number of words");
         for (String w : wordsInNumFiles(maxNumber)){
-            System.out.println(w);
             printFilesIn(w);
         }
     }
@@ -98,6 +96,7 @@ public class WordsInFiles {
     public static void main (String[] args) {
         WordsInFiles wif = new WordsInFiles();
         wif.tester();
+        wif.printFilesIn("red");
     }
 
 
