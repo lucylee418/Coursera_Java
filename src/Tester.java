@@ -1,14 +1,5 @@
-
-/**
- * Write a description of class Tester here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-
 import java.util.*;
-
-import javax.print.event.PrintJobAdapter;
+// import javax.print.event.PrintJobAdapter;
 
 public class Tester
 {
