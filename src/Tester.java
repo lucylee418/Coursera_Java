@@ -19,9 +19,48 @@ public class Tester
         la.printAll();
     }
 
+    public void testUniqIP(){
+        LogAnalyzer la = new LogAnalyzer();
+        la.readFile("short-test_log");
+        int uniqueIPs = la.countUniqueIPs();
+        System.out.println("There are "+ uniqueIPs+ " IPs");
+    }
+
+
+    public void testtHigherThanNum(int num){
+        LogAnalyzer la = new LogAnalyzer();
+        la.readFile("weblog1_log");
+        la.printAllHigherThanNum(num);
+    }
+
+
+    public void testuUiqueIPVisitsOnDay(String someday){
+        LogAnalyzer la = new LogAnalyzer();
+        la.readFile("weblog1_log");
+        ArrayList<String> visitArray = la.uniqueIPVisitsOnDay(someday);
+        System.out.println("Size: "+visitArray.size());
+    }
+
+
+    public void testCountUniqueIPsInRange(int low, int high){
+        LogAnalyzer la = new LogAnalyzer();
+        la.readFile("weblog1_log");
+        int myCounts = la.countUniqueIPsInRange(low, high);
+        System.out.println("Counts: "+myCounts);
+    }
+
+
     public static void main (String[] args){
         Tester tt = new Tester();
         // tt.testLogEntry();
-        tt.testLogAnalyzer();
+        // tt.testLogAnalyzer();
+        // tt.testUniqIP();
+        // tt.testtHigherThanNum(400);
+        // tt.testuUiqueIPVisitsOnDay("Mar 17");
+        tt.testCountUniqueIPsInRange(200, 299);
     }
+
+
+
+
 }
