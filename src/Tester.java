@@ -8,6 +8,8 @@
 
 import java.util.*;
 
+import javax.print.event.PrintJobAdapter;
+
 public class Tester
 {
     public void testLogEntry() {
@@ -18,11 +20,17 @@ public class Tester
     }
     
     public void testLogAnalyzer() {
-        // complete method
+        // Create a LogAnalyzer object
+        LogAnalyzer la = new LogAnalyzer();
+        // call readFile on the data file short-test_log
+        la.readFile("short-test_log");
+        // call printAll to print all the web logs.
+        la.printAll();
     }
 
     public static void main (String[] args){
         Tester tt = new Tester();
-        tt.testLogEntry();
+        // tt.testLogEntry();
+        tt.testLogAnalyzer();
     }
 }
