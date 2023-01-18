@@ -1,5 +1,6 @@
 import java.util.*;
 import edu.duke.*;
+import java.io.*;
 
 public class VigenereBreaker {
     public String sliceString(String message, int whichSlice, int totalSlices) {
@@ -60,11 +61,13 @@ public class VigenereBreaker {
 
 
     public String breakForLanguage(String encrypted, HashSet<String> dictionary){
+        char common = mostCommonCharIn(dictionary);
+        System.out.println("Most common character: "+common);
         int maxSoFar = 0;
         int keyLength = 0;
         // Try all key lengths from 1 to 100
         for (int i=1; i<101; i++){
-            int[] foundKey = tryKeyLength(encrypted, i, 'e');
+            int[] foundKey = tryKeyLength(encrypted, i, common);
             // Decrypt the message
             VigenereCipher vc = new VigenereCipher(foundKey);
             String decrypted = vc.decrypt(encrypted);
@@ -84,19 +87,70 @@ public class VigenereBreaker {
     }
 
 
+    public char mostCommonCharIn(HashSet<String> dictionary){
+        // Initialize frequency hashmap
+        HashMap<Character, Integer> charFreq = new HashMap<Character, Integer>();
+        // find out which character appears most often in the words in dictionary
+        for (String w : dictionary){
+            StringBuilder currWord = new StringBuilder(w);
+            for (int i=0; i<w.length(); i++ ){
+                char currChar = currWord.charAt(i);
+                if (!charFreq.keySet().contains(currChar)){
+                    charFreq.put(currChar, 1);
+                }
+                else{
+                    charFreq.put(currChar, charFreq.get(currChar)+1);
+                }
+            }
+        }
+        char mostFreq = ' ';
+        int maxSoFar = 0;
+        for (char k : charFreq.keySet()){
+            if (maxSoFar < charFreq.get(k)){
+                maxSoFar = charFreq.get(k);
+                mostFreq = k;
+            }
+        }
+        return mostFreq;
+    }
+
+
+
+    public String breakForAllLangs(String encrypted, HashMap<String, HashSet<String>> languages){
+        String decrypted = "";
+        for (String language : languages.keySet()){
+            System.out.println("Try with "+language);
+            HashSet<String> currDict = languages.get(language);
+            decrypted = breakForLanguage(encrypted, currDict);
+        }
+        return decrypted;
+    }
+
+
+
     public void breakVigenere () {
         //WRITE YOUR CODE HERE
         FileResource fr = new FileResource();
         String myFile = fr.asString();
-        // Make a new FileResource to read from the English dictionary file 
-        FileResource dfr = new FileResource("English");
-        // System.out.println(myFile);
+
+        // // Try with many languages
+        // DirectoryResource dr = new DirectoryResource();
+        // HashMap<String, HashSet<String>> allDicts = new HashMap<String, HashSet<String>>();
+        // // For each file,
+        // for (File f : dr.selectedFiles()){
+        //     FileResource dfr = new FileResource(f.getName());
+        //     String language = f.getName();
+        //     HashSet<String> words = readDictionary(dfr);
+        //     allDicts.put(language, words);
+        //     System.out.println(language+" has been added.");
+        // }
+        // String decrypted = breakForAllLangs(myFile, allDicts);
+
+
+        // Try with one language
+        FileResource dfr = new FileResource("German");
         HashSet<String> myDictionary = readDictionary(dfr);
         String decrypted = breakForLanguage(myFile, myDictionary);
-
-        // int[] foundKey = tryKeyLength(myFile, 4, 'e');
-        // VigenereCipher vc = new VigenereCipher(foundKey);
-        // String decrypted = vc.decrypt(myFile);
         System.out.println(decrypted);
     }
 
