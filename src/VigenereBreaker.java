@@ -30,14 +30,73 @@ public class VigenereBreaker {
     }
 
 
+    public  HashSet<String> readDictionary(FileResource fr){
+        // Make a new HashSet of Strings
+        HashSet<String> myHash = new  HashSet<String>();
+        // Read each line in fr 
+        for (String word : fr.words()){
+            // convert that line to lowercase
+            word = word.toLowerCase();
+            // put that line into the HashSet
+            myHash.add(word);
+        }
+        return myHash;
+    }
+
+
+    public int countWords(String message, HashSet<String> dictionary){
+        int count = 0;
+        // Split the message into words
+        String[] wordsArray = message.split("\\W+");
+        // Iterate over those words
+        for (String s : wordsArray){
+            // See how many appear in the dictionary
+            if (dictionary.contains(s.toLowerCase())){
+                count ++;
+            }
+        }
+        return count;
+    }
+
+
+    public String breakForLanguage(String encrypted, HashSet<String> dictionary){
+        int maxSoFar = 0;
+        int keyLength = 0;
+        // Try all key lengths from 1 to 100
+        for (int i=1; i<101; i++){
+            int[] foundKey = tryKeyLength(encrypted, i, 'e');
+            // Decrypt the message
+            VigenereCipher vc = new VigenereCipher(foundKey);
+            String decrypted = vc.decrypt(encrypted);
+            // Count how many of the “words” in it are real words, based on the dictionary passed in 
+            int realWords = countWords(decrypted, dictionary);
+            if (maxSoFar < realWords){
+                maxSoFar = realWords;
+                keyLength = i;
+            }
+        }
+        int[] foundKey = tryKeyLength(encrypted, keyLength, 'e');
+        VigenereCipher vc = new VigenereCipher(foundKey);
+        String decrypted = vc.decrypt(encrypted);
+        System.out.println("key length: "+keyLength);
+        System.out.println("# valid words: "+maxSoFar);
+        return decrypted;
+    }
+
+
     public void breakVigenere () {
         //WRITE YOUR CODE HERE
         FileResource fr = new FileResource();
         String myFile = fr.asString();
-        System.out.println(myFile);
-        int[] foundKey = tryKeyLength(myFile, 5, 'e');
-        VigenereCipher vc = new VigenereCipher(foundKey);
-        String decrypted = vc.decrypt(myFile);
+        // Make a new FileResource to read from the English dictionary file 
+        FileResource dfr = new FileResource("English");
+        // System.out.println(myFile);
+        HashSet<String> myDictionary = readDictionary(dfr);
+        String decrypted = breakForLanguage(myFile, myDictionary);
+
+        // int[] foundKey = tryKeyLength(myFile, 4, 'e');
+        // VigenereCipher vc = new VigenereCipher(foundKey);
+        // String decrypted = vc.decrypt(myFile);
         System.out.println(decrypted);
     }
 
@@ -50,11 +109,11 @@ public class VigenereBreaker {
 
         // FileResource fr = new FileResource();
         // String myFile = fr.asString();
-        // int[] intArray = vb.tryKeyLength(myFile, 5, 'e');
+        // int[] intArray = vb.tryKeyLength(myFile, 4, 'e');
         // System.out.println(intArray);
 
         vb.breakVigenere();
     }
     
-    
+
 }
