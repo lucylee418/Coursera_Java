@@ -133,25 +133,25 @@ public class VigenereBreaker {
         FileResource fr = new FileResource();
         String myFile = fr.asString();
 
-        // // Try with many languages
-        // DirectoryResource dr = new DirectoryResource();
-        // HashMap<String, HashSet<String>> allDicts = new HashMap<String, HashSet<String>>();
-        // // For each file,
-        // for (File f : dr.selectedFiles()){
-        //     FileResource dfr = new FileResource(f.getName());
-        //     String language = f.getName();
-        //     HashSet<String> words = readDictionary(dfr);
-        //     allDicts.put(language, words);
-        //     System.out.println(language+" has been added.");
-        // }
-        // String decrypted = breakForAllLangs(myFile, allDicts);
+        // Try with many languages
+        DirectoryResource dr = new DirectoryResource();
+        HashMap<String, HashSet<String>> allDicts = new HashMap<String, HashSet<String>>();
+        // For each file,
+        for (File f : dr.selectedFiles()){
+            FileResource dfr = new FileResource(f.getName());
+            String language = f.getName();
+            HashSet<String> words = readDictionary(dfr);
+            allDicts.put(language, words);
+            System.out.println(language+" has been added.");
+        }
+        String decrypted = breakForAllLangs(myFile, allDicts);
 
 
-        // Try with one language
-        FileResource dfr = new FileResource("German");
-        HashSet<String> myDictionary = readDictionary(dfr);
-        String decrypted = breakForLanguage(myFile, myDictionary);
-        System.out.println(decrypted);
+        // // Try with one language
+        // FileResource dfr = new FileResource("German");
+        // HashSet<String> myDictionary = readDictionary(dfr);
+        // String decrypted = breakForLanguage(myFile, myDictionary);
+        // System.out.println(decrypted);
     }
 
 
