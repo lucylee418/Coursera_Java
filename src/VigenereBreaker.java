@@ -144,7 +144,7 @@ public class VigenereBreaker {
             allDicts.put(language, words);
             System.out.println(language+" has been added.");
         }
-        String decrypted = breakForAllLangs(myFile, allDicts);
+        // String decrypted = breakForAllLangs(myFile, allDicts);
 
 
         // // Try with one language
