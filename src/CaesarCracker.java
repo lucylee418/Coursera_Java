@@ -50,5 +50,10 @@ public class CaesarCracker {
         return cc.decrypt(encrypted);
         
     }
+
+    
+    public static void main (String[] args){
+        
+    }
    
 }
